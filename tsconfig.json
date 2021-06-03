@@ -6,6 +6,7 @@
         "sourceRoot": "./ts",
         "outDir": "./js",
         "sourceMap": true,
-        "target": "esnext"
+        "target": "esnext",
+        "typeRoots": ["./typings"]
     }
 }
