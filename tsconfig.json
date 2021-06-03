@@ -3,7 +3,6 @@
         "allowJs": false,
         "sourceRoot": "./ts",
         "outDir": "./js",
-        "sourceMap": true,
-        "mapRoot": "./js",
+        "sourceMap": true
     }
 }
