@@ -1,8 +1,10 @@
 {
     "compilerOptions": {
+        "module": "esnext",
         "allowJs": false,
         "sourceRoot": "./ts",
         "outDir": "./js",
-        "sourceMap": true
+        "sourceMap": true,
+        "target": "esnext"
     }
 }
