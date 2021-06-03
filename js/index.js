@@ -1,20 +1,25 @@
-"use strict";
-exports.__esModule = true;
-exports.start = void 0;
-var dotenv = require("dotenv");
-var Discord = require("discord.js");
+import * as dotenv from "dotenv";
+import * as Discord from "discord.js";
+import * as mysql from "mysql";
 dotenv.config();
-var client = new Discord.Client();
-client.once("ready", function () {
+const client = new Discord.Client();
+globalThis.db = mysql.createConnection({
+    host: process.env.DATABASE_IP,
+    user: process.env.DATABASE_USER,
+    password: process.env.DATABASE_PASS,
+    database: "MailMarine"
+});
+const db = globalThis.db;
+db.connect();
+client.once("ready", () => {
     console.log("Ready!");
 });
-client.on("message", function (message) {
+client.on("message", (message) => {
 });
-client.on("raw", function (e) {
-    var d = e.d;
+client.on("raw", e => {
+    const { d } = e;
 });
-var start = function () {
+export const start = () => {
     client.login(process.env.TOKEN);
 };
-exports.start = start;
 //# sourceMappingURL=index.js.map
