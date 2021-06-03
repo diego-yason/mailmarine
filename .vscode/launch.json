@@ -6,7 +6,7 @@
     "configurations": [
         {
             "name": "Launch Program",
-            "program": "${workspaceFolder}/js/index.js",
+            "program": "${workspaceFolder}/res/cleanBuild.js",
             "request": "launch",
             "skipFiles": [
                 "<node_internals>/**"

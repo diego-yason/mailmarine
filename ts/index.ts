@@ -18,4 +18,6 @@ client.on("raw", e => {
     const {d} = e;
 });
 
-client.login(process.env.TOKEN);
+export const start = () => {
+    client.login(process.env.TOKEN);
+}
