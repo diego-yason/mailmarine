@@ -16,5 +16,9 @@
         "@typescript-eslint"
     ],
     "rules": {
+        "@typescript-eslint/no-empty-function": "off",
+        "semi": "error",
+        "no-unused-vars": "warn",
+        "no-empty-function": "warn"
     }
 }
