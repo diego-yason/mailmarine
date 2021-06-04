@@ -49,7 +49,7 @@ client.on("raw", e => {
     }
 });
 
-export const start = (): void => {
+export default function(): void {
     db.connect(err => {
         if (err) {
             throw new Error;
