@@ -1,11 +1,11 @@
 /* eslint-disable no-var */
-import { AxiosInstance } from "axios";
+import { AxiosInstance, AxiosPromise } from "axios";
 import { Connection } from "mysql";
 
 declare var db: Connection;
-declare var axios: AxiosInstance;
+declare var axios: AxiosPromise;
 
 declare global {
     var db: Connection;
-    var axios: AxiosInstance;
+    var axios: AxiosPromise;
 }
