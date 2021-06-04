@@ -24,8 +24,6 @@ globalThis.db = mysql.createConnection({
 const db = globalThis.db,
       axios = globalThis.axios;
 
-db.connect();
-
 client.once("ready", () => {
     console.log("Ready!");
 });
@@ -52,5 +50,12 @@ client.on("raw", e => {
 });
 
 export const start = (): void => {
-    client.login(process.env.TOKEN);
+    db.connect(err => {
+        if (err) {
+            throw new Error;
+        }
+
+        console.log("Connection to MySQL Server sucess.");
+        client.login(process.env.TOKEN);
+    });
 };
