@@ -1,6 +1,7 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-/* eslint-disable @typescript-eslint/no-var-requires */
+import fs from "fs";
+import child_process from "child_process";
+import index from "../js/index.js";
 
-require("fs").rmSync("../build", { recursive: true, force: true });
-require("child_process").execSync(`cd ${__dirname}\n./build.sh\n`);
-require("../js/index.js").default();
+fs.rmSync("../build", { recursive: true, force: true });
+child_process.execSync(`cd res\n./build.sh\n`);
+index();
