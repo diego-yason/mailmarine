@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "module": "esnext",
+        "module": "CommonJS",
         "moduleResolution": "node",
         "allowJs": false,
         "sourceRoot": "./ts",
