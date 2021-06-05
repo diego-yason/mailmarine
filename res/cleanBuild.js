@@ -3,4 +3,4 @@
 
 require("fs").rmSync("../build", { recursive: true, force: true });
 require("child_process").execSync(`cd ${__dirname}\n./build.sh\n`);
-require("../js/index.js")();
+require("../js/index.js").default();
