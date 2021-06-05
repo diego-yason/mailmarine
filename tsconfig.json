@@ -1,12 +1,13 @@
 {
     "compilerOptions": {
-        "module": "CommonJS",
+        "module": "esnext",
+        "lib": ["ES6"],
         "moduleResolution": "node",
         "allowJs": false,
         "sourceRoot": "./ts",
         "outDir": "./js",
         "sourceMap": true,
-        "target": "esnext",
+        "target": "es2017",
         "typeRoots": ["./typings"]
     }
 }
