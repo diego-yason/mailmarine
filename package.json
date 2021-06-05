@@ -29,5 +29,6 @@
     "@typescript-eslint/parser": "^4.26.0",
     "eslint": "^7.27.0"
   },
-  "description": ""
+  "description": "",
+  "type": "module"
 }
