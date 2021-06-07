@@ -2,6 +2,7 @@ import * as Discord from "discord.js";
 import * as dotenv from "dotenv";
 import * as mysql from "mysql2/promise";
 import axiospkg from "axios";
+import * as fs from "fs";
 
 dotenv.config();
 
@@ -24,12 +25,14 @@ axios.headers = {
 globalThis.db = database;
 globalThis.axios = axios;
 
+globalThis.readSql = (file) =>{
+    return fs.readFileSync("../res/MySQL/" + file).toString();
+};
+
 client.once("ready", () => {
     console.log("Ready");
 });
 
 export default function(): void {
-    
-
     client.login(process.env.TOKEN);
 }
