@@ -13,6 +13,7 @@
         "declaration": true,
         "mapRoot": "./js"
     },
+    "files": ["types/global.d.ts"],
     "include": ["./ts"],
     "exclude": ["./js"]
 }
