@@ -1,6 +1,6 @@
 import * as Discord from "discord.js";
 import * as dotenv from "dotenv";
-import * as mysql from "mysql2";
+import * as mysql from "mysql2/promise";
 import axiospkg from "axios";
 
 dotenv.config();
@@ -13,6 +13,7 @@ const database = mysql.createPool({
     host: process.env.DATABASE_IP,
     port: parseInt(process.env.DATABASE_PORT)
 });
+
 const axios = axiospkg.defaults;
 
 axios.baseURL = "https://discord.com/api/v9";
@@ -22,8 +23,6 @@ axios.headers = {
 
 globalThis.db = database;
 globalThis.axios = axios;
-
-const promisedb = database.promise();
 
 client.once("ready", () => {
     console.log("Ready");
