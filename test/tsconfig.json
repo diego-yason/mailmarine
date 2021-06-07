@@ -1,0 +1,10 @@
+{
+    "extends": "../tsconfig.json",
+    "compilerOptions": {
+        "outDir": "./js",
+        "sourceRoot": "./ts",
+        "sourceMap": true
+    },
+    "include": ["./ts"],
+    "exclude": ["../ts", "../js"]
+}

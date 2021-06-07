@@ -29,5 +29,7 @@ client.once("ready", () => {
 });
 
 export default function(): void {
+    
+
     client.login(process.env.TOKEN);
 }
