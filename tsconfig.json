@@ -8,7 +8,10 @@
         "outDir": "./js",
         "sourceMap": true,
         "target": "es2017",
-        "typeRoots": ["./typings"]
+        "typeRoots": ["./typings"],
+        "declarationMap": true,
+        "declaration": true,
+        "mapRoot": "./js"
     },
     "include": ["./ts"],
     "exclude": ["./js"]
