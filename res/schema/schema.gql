@@ -1,0 +1,23 @@
+type server {
+    id: String!
+    local_id: ID!
+    banned: boolean
+}
+
+type user {
+    id: String!
+    local_id: ID!
+    banned: boolean
+}
+
+type message {
+    id: String!
+    local_id: ID!
+    deleted: boolean
+    origin_id: String
+    original: boolean!
+}
+
+type Query {
+    messages:
+}
