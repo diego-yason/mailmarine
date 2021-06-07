@@ -15,6 +15,6 @@ export const createMessage = async (message: Message): Promise<void> => {
     db.execute(readfile("newMessage.sql"), [message.id, message.guild.id, message.author.id]);
 };
 
-export const deleteMessage = async (messageId) => {
-
+export const deleteMessage = async (messageId: string): Promise<void> => {
+    db.execute(readfile("findMessage.sql"), [messageId]);
 };
