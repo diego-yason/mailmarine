@@ -4,14 +4,10 @@
         "lib": ["ES6"],
         "moduleResolution": "node",
         "allowJs": false,
-        "sourceRoot": "./ts",
         "outDir": "./js",
         "sourceMap": true,
         "target": "es2017",
-        "typeRoots": ["./typings"],
-        "declarationMap": true,
-        "declaration": true,
-        "mapRoot": "./js"
+        "typeRoots": ["./typings"]
     },
     "files": ["types/global.d.ts"],
     "include": ["./ts"],
