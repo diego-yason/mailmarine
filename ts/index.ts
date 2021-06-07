@@ -8,7 +8,7 @@ dotenv.config();
 
 const client = new Discord.Client();
 
-const database = mysql.createPool({
+const database = await mysql.createPool({
     user: process.env.DATABASE_USER,
     password: process.env.DATABASE_PASS,
     host: process.env.DATABASE_IP,
