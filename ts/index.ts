@@ -21,8 +21,9 @@ axios.headers = {
 };
 
 globalThis.db = database;
-globalThis.promisedb = database.promise();
 globalThis.axios = axios;
+
+const promisedb = database.promise();
 
 client.once("ready", () => {
     console.log("Ready");
