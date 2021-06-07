@@ -1,15 +1,20 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const mysql = require("mysql2");
-
 describe("Messages", () => {
-    const db = mysql.createPool({
-        connectionLimit: 2
-    });
 
-    it("creates a message to the system", async () => {
-        expect(true).toBe(true);
-    });
+    it.todo("creates a message to the system");
 
     it.todo("distributes the message to the other servers");
+
+});
+
+describe("Servers", () => {
+    
+    it.todo("Servers can be added");
+});
+
+describe("Deleting", () => {
+
+    it.todo("Original message is deleted from server and marked as deleted");
+
+    it.todo("Duplicated messages are deleted from server and marked as deleted");
 
 });
