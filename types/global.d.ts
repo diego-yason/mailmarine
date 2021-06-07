@@ -7,10 +7,8 @@ import { Pool } from "mysql2";
 
 declare global {
     var db: Pool;
-    var promisedb: Pool;
     var axios : AxiosRequestConfig;
 }
 
 declare var db: Pool;
-declare var promisedb: Pool;
 declare var axios : AxiosRequestConfig;
