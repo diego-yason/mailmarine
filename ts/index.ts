@@ -1,61 +1,38 @@
-import * as dotenv from "dotenv";
 import * as Discord from "discord.js";
-import * as mysql from "mysql";
-import { Interaction, Payload } from "../typings/payload";
-import * as axiospkg from "axios";
+import * as dotenv from "dotenv";
+import * as mysql from "mysql2/promise";
+import axiospkg from "axios";
+import * as fs from "fs";
 
 dotenv.config();
+
 const client = new Discord.Client();
 
-globalThis.axios = axiospkg.default({
-    baseURL: "https://discord.com/api/v9",
-    headers: {
-        Authorization: `Bot ${process.env.TOKEN}`
-    }
-});
-
-globalThis.db = mysql.createConnection({
-    host: process.env.DATABASE_IP,
+const database = await mysql.createPool({
     user: process.env.DATABASE_USER,
     password: process.env.DATABASE_PASS,
-    database: "MailMarine"
+    host: process.env.DATABASE_IP,
+    port: parseInt(process.env.DATABASE_PORT)
 });
 
-const db = globalThis.db,
-      axios = globalThis.axios;
+const axios = axiospkg.defaults;
+
+axios.baseURL = "https://discord.com/api/v9";
+axios.headers = {
+    Authorization: `Bot ${process.env.TOKEN}`
+};
+
+globalThis.db = database;
+globalThis.axios = axios;
+
+globalThis.readSql = (file) => {
+    return fs.readFileSync(file).toString();
+};
 
 client.once("ready", () => {
-    console.log("Ready!");
-});
-
-client.on("message", (message) => {
-
-});
-
-client.on("raw", e => {
-    const { op, d, s: seq, t: EVENT_NAME }: Payload = e;
-    if (EVENT_NAME === "INTERACTION_CREATE") {
-        const interaction: Interaction = d;
-
-        const reply = () => {
-            
-        };
-
-        switch (interaction.data.name) {
-            case "begin-transmission": {
-                break;
-            }
-        }
-    }
+    console.log("Ready");
 });
 
 export default function(): void {
-    db.connect(err => {
-        if (err) {
-            throw new Error;
-        }
-
-        console.log("Connection to MySQL Server sucess.");
-        client.login(process.env.TOKEN);
-    });
-};
+    client.login(process.env.TOKEN);
+}
