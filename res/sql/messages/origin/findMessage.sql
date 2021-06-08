@@ -1,3 +1,3 @@
 SELECT messageid
-FROM ?_message
-WHERE ?=?;
+FROM origin_message
+WHERE messageid=?;
