@@ -7,4 +7,4 @@ VALUES (
     (SELECT localid
         FROM users
         WHERE localid=?)
-)
+);
