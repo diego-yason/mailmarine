@@ -25,8 +25,8 @@ axios.headers = {
 globalThis.db = database;
 globalThis.axios = axios;
 
-globalThis.readSql = (file) =>{
-    return fs.readFileSync("../res/MySQL/" + file).toString();
+globalThis.readSql = (file) => {
+    return fs.readFileSync(file).toString();
 };
 
 client.once("ready", () => {

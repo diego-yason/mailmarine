@@ -1,6 +1,10 @@
 {
     "compilerOptions": {
         "module": "esnext",
+        "baseUrl": ".",
+        "paths": {
+            "@sql/*": ["res/sql/*"]
+        },
         "lib": ["ES6"],
         "moduleResolution": "node",
         "allowJs": false,
