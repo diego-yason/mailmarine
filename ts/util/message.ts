@@ -21,5 +21,5 @@ export const createMessage = async (message: Message): Promise<void> => {
 
 export const deleteMessage = async (messageId: string): Promise<void> => {
     const origin = await db.execute(readfile("@sql/messages/origin/findMessage.sql"), [messageId]).catch(check);
-    const replicated = await db.execute(readfile("@sql/messages/findMessage.sql"));
+    const replicated = await db.execute(readfile("@sql/messages/findMessage.sql")).catch(check);
 };
