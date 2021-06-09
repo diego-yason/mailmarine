@@ -1,7 +1,7 @@
 import fs from "fs";
 import child_process from "child_process";
-import index from "@root/js/index.js";
+import index from "../js/test.js";
 
 fs.rmSync("@root/build", { recursive: true, force: true });
-child_process.execSync(`cd res\n./build.sh\n`);
+child_process.exec(`./build.sh`);
 index();

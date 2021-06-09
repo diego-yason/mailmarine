@@ -1,10 +1,10 @@
 {
   "name": "mailmarine",
   "version": "1.0.0",
-  "main": "./res/cleanBuild.js",
+  "main": "./res/cleanStart.js",
   "scripts": {
     "test": "jest --watchAll --verbose",
-    "start": "cd res && node start.js",
+    "start": "cd res && node cleanStart.js",
     "compile": "cd res && node cleanBuild.js"
   },
   "repository": {
