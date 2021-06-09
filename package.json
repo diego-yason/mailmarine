@@ -4,7 +4,8 @@
   "main": "./res/cleanBuild.js",
   "scripts": {
     "test": "jest --watchAll --verbose",
-    "start": "cd res && node cleanBuild.js && node ../js/index.js"
+    "start": "cd res && node start.js",
+    "compile": "cd res && node cleanBuild.js"
   },
   "repository": {
     "type": "git",
