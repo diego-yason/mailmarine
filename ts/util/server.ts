@@ -3,7 +3,7 @@ import * as Db from "res/types/database";
 
 setInterval(() => {
     channelcache.clear();
-}, 10800000);
+}, parseInt(process.env.CACHE) || 10800000);
 
 export const getChannel = async (serverId: string): Promise<string> => {
     if (channelcache.get(serverId)) {
