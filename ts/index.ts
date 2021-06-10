@@ -41,6 +41,7 @@ axiosretry(axios, {
 
 globalThis.db = database;
 globalThis.axios = axios;
+globalThis.client = client;
 
 globalThis.readSql = (file) => {
     return fs.readFileSync(file).toString();
