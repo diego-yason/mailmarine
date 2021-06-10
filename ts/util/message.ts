@@ -2,6 +2,7 @@ import { Message } from "discord.js";
 import * as Db from "res/types/database";
 import * as usercache from "memory-cache";
 import * as channelcache from "memory-cache";
+import * as bancache from "memory-cache";
 
 const db = globalThis.db;
 const readfile = globalThis.readSql;
@@ -26,22 +27,28 @@ function check(err: unknown): void {
     console.error(err);
 }
 
-// anti memory leak lol
+// anti memory leak lol | clear cache every 3 hours
 setInterval(() => {
     usercache.clear();
     channelcache.clear();
+    bancache.clear();
 }, 10800000);
 
 export const createOriginMessage = async (message: Message): Promise<void> => {
     // check if user exists in the db and isn't banned
 
-    const user: Db.User = await db.execute(sql.users.read, [message.author.id]).catch(check)[0][0];
+    const user: Db.User = usercache.get(message.author.id) || await db.execute(sql.users.read, [message.author.id]).catch(check).then((value) => {
+        usercache.put(message.author.id, value[0][0]);
+    })[0][0];
 
     if (!user.localid) {
         // user isn't registered yet to the system
         db.query(sql.users.create, [message.author.id]).catch(check);
     } else {
-        const banDetails: Db.Bans = await db.query(sql.users.checkBan, ["user", user.localid]).catch(check)[0][0];
+        const banDetails: Db.Bans = bancache.get(user.localid) || await db.query(sql.users.checkBan, ["user", user.localid]).catch(check).then((value) => {
+            usercache.put(user.localid, value[0][0]);
+        })[0][0];
+        //  ban expiry isn't complete yet                            or not temp ban (aka permaban)
         if ((parseInt(banDetails.expiryDate) > new Date().getTime()) || !banDetails.temporary) {
             return;
         }
