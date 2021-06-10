@@ -38,6 +38,15 @@ export const deleteMessage = async (messageId: string): Promise<void> => {
     const origin: Db.OriginMessage = await (db.execute(readfile("@sql/messages/origin/findMessage.sql"), [messageId]).catch(check))[0][0];
     const replicated: Db.ReplicatedMessage[] = await (db.execute(readfile("@sql/messages/findMessage.sql")).catch(check))[0];
 
+    const getChannel = async (): Promise<string> => {
+        const server: Db.Servers = await (db.query(readfile("@sql/servers/getChannel.sql"), [origin.server_origin]))[0][0];
+
+        return new Promise((res, rej) => {
+            channelcache.put(origin.server_origin, server.channel);
+            res(server.channel);
+        });
+    };
+
     db.execute(readfile("@sql/messages/origin/deleteMessage.sql"), [origin.messageid]).catch(check);
 
     axios.delete(`/channels/${}`)
