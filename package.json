@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "main": "./res/cleanStart.js",
   "scripts": {
-    "test": "jest --watchAll --verbose",
-    "start": "cd res && node cleanStart.js",
-    "compile": "cd res && node cleanBuild.js"
+    "test": "jest --watchAll --verbose"
   },
   "repository": {
     "type": "git",
