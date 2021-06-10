@@ -1,6 +1,10 @@
 import * as channelcache from "memory-cache";
 import * as Db from "res/types/database";
 
+setInterval(() => {
+    channelcache.clear();
+}, 10800000);
+
 export const getChannel = async (serverId: string): Promise<string> => {
     if (channelcache.get(serverId)) {
         return new Promise((res) => res(channelcache.get(serverId)));
