@@ -1,14 +1,14 @@
-export interface DbUser {
+export interface User {
     userid:          string;
     localid:         number;
 }
 
-export interface DbServers {
+export interface Servers {
     serverid:        string;
     localid:         string;
 }
 
-export interface DbBans {
+export interface Bans {
     id:              number;
     localid:         number;
     user:            boolean;
@@ -20,7 +20,7 @@ export interface DbBans {
     expiryDate?:     string;
 }
 
-export interface DbModeration {
+export interface Moderation {
     userid:          string;
     localid:         number;
     mute:            boolean;
@@ -30,7 +30,7 @@ export interface DbModeration {
     unban:           boolean;
 }
 
-export interface DbOriginMessage {
+export interface OriginMessage {
     id:              number;
     messageid:       string;
     server_origin:   number;
@@ -40,7 +40,7 @@ export interface DbOriginMessage {
     mod:             number;
 }
 
-export interface DbReplicatedMessage {
+export interface ReplicatedMessage {
     id:              number;
     originId:        number;
     server:          number;
