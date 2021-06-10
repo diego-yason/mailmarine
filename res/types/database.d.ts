@@ -6,6 +6,7 @@ export interface User {
 export interface Servers {
     serverid:        string;
     localid:         string;
+    channel:         string;
 }
 
 export interface Bans {
