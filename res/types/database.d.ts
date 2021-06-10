@@ -45,5 +45,6 @@ export interface ReplicatedMessage {
     id:              number;
     originId:        number;
     server:          number;
+    messageid:       string;
 }
 
