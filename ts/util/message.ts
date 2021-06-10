@@ -49,5 +49,5 @@ export const deleteMessage = async (messageId: string): Promise<void> => {
 
     db.execute(readfile("@sql/messages/origin/deleteMessage.sql"), [origin.messageid]).catch(check);
 
-    axios.delete(`/channels/${}`)
+    axios.delete(`/channels/${channelcache.get(origin.server_origin) || await getChannel()}/messages/${origin.messageid}`);
 };
