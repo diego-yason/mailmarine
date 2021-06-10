@@ -11,9 +11,9 @@
         "outDir": "./js",
         "sourceMap": true,
         "target": "es2017",
-        "typeRoots": ["./typings"]
+        "typeRoots": ["./res/types"]
     },
-    "files": ["types/global.d.ts"],
+    "files": ["res/types/global.d.ts"],
     "include": ["./ts"],
     "exclude": ["./js", "./test"]
 }
