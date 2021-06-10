@@ -72,7 +72,6 @@ export const deleteMessage = async (messageId: string): Promise<void> => {
     axios.delete(`/channels/${channelcache.get(origin.server_origin) || await getChannel()}/messages/${origin.messageid}`);
 
     replicated.forEach(async (value, index, array) => {
-        db.execute(sql.messages.delete(false), [value.messageid]).catch(check);
         axios.delete(`/channels/${channelcache.get(value.server) || await getChannel()}/messages/${value.messageid}`);
     });
 };
