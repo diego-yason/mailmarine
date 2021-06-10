@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/KingMarine-GH/mailmarine#readme",
   "dependencies": {
+    "@types/memory-cache": "^0.2.1",
     "axios": "^0.21.1",
     "discord.js": "^12.5.3",
     "dotenv": "^10.0.0",
