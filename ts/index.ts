@@ -3,6 +3,7 @@ import * as dotenv from "dotenv";
 import * as mysql from "mysql2/promise";
 import axiospkg from "axios";
 import * as fs from "fs";
+import axiosretry from "axios-retry";
 
 dotenv.config();
 
@@ -21,6 +22,21 @@ const axios = axiospkg.create({
     headers: {
         Authorization: `Bot ${process.env.TOKEN}`
     }
+});
+
+axiosretry(axios, {
+    retries: 3,
+    retryDelay: ((retries, err): number => {
+        // todo: this
+        switch (err.code) {
+            case "429": {
+                return err.response.data.retry_after * 1000;
+            }
+            default: {
+                return 300;
+            }
+        }
+    })
 });
 
 globalThis.db = database;
