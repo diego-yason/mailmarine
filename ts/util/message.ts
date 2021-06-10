@@ -1,6 +1,7 @@
 import { Message } from "discord.js";
 import * as Db from "res/types/database";
-import * as cache from "memory-cache";
+import * as usercache from "memory-cache";
+import * as channelcache from "memory-cache";
 
 const db = globalThis.db;
 const readfile = globalThis.readSql;
@@ -11,7 +12,8 @@ function check(err: unknown): void {
 
 // anti memory leak lol
 setInterval(() => {
-    cache.clear();
+    usercache.clear();
+    channelcache.clear();
 }, 10800000);
 
 export const createMessage = async (message: Message): Promise<void> => {
@@ -33,8 +35,10 @@ export const createMessage = async (message: Message): Promise<void> => {
 };
 
 export const deleteMessage = async (messageId: string): Promise<void> => {
-    const origin = await db.execute(readfile("@sql/messages/origin/findMessage.sql"), [messageId]).catch(check)[0];
-    const replicated = await db.execute(readfile("@sql/messages/findMessage.sql")).catch(check)[0];
+    const origin: Db.OriginMessage = await (db.execute(readfile("@sql/messages/origin/findMessage.sql"), [messageId]).catch(check))[0][0];
+    const replicated: Db.ReplicatedMessage[] = await (db.execute(readfile("@sql/messages/findMessage.sql")).catch(check))[0];
 
-    db.execute(readfile("@sql/messages/origin/deleteMessage.sql"), [origin.deleted]).catch(check);
+    db.execute(readfile("@sql/messages/origin/deleteMessage.sql"), [origin.messageid]).catch(check);
+
+    axios.delete(`/channels/${}`)
 };
