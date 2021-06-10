@@ -34,6 +34,4 @@ client.once("ready", () => {
     console.log("Ready");
 });
 
-export default function(): void {
-    client.login(process.env.TOKEN);
-}
+client.login(process.env.TOKEN);
