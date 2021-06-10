@@ -1,3 +1,3 @@
 SELECT *
 FROM servers
-WHERE lcoalid = ?;
+WHERE serverid = ?;
