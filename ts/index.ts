@@ -4,6 +4,7 @@ import * as mysql from "mysql2/promise";
 import axiospkg from "axios";
 import * as fs from "fs";
 import axiosretry from "axios-retry";
+import * as server from "./util/server";
 
 dotenv.config();
 
@@ -51,8 +52,17 @@ client.once("ready", () => {
     console.log("Ready");
 });
 
-client.on("message", (message) => {
-    
+client.on("message", async (message) => {
+    // check if message is inside the allotted chat
+    try {
+        // message outside of the inter server chat
+        if (message.channel.id != await server.getChannel(message.guild.id)) {
+            return;
+        }
+    } catch {
+        // not yet set up, ignoring the message
+        return;
+    }
 });
 
 client.login(process.env.TOKEN);
