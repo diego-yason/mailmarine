@@ -16,7 +16,7 @@ setInterval(() => {
     channelcache.clear();
 }, 10800000);
 
-export const createMessage = async (message: Message): Promise<void> => {
+export const createOriginMessage = async (message: Message): Promise<void> => {
     // check if user exists in the db and isn't banned
 
     const user: Db.User = await db.execute(readfile("@sql/users/readUsersById.sql"), [message.author.id]).catch(check)[0][0];
@@ -32,6 +32,10 @@ export const createMessage = async (message: Message): Promise<void> => {
     }
 
     db.execute(readfile("@sql/messages/origin/newMessage.sql"), [message.id, message.guild.id, message.author.id]).catch(check);
+};
+
+export const createReplicatedMessage = async (message: Message, localId: number): Promise<void> => {
+    db.execute(readfile("@sql/messages/replicated/newMessage.sql"), [message.id, message.guild.id, localId]);
 };
 
 export const deleteMessage = async (messageId: string): Promise<void> => {
