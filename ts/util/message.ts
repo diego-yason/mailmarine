@@ -1,4 +1,6 @@
 import { Message } from "discord.js";
+import * as Db from "res/types/database";
+import * as cache from "memory-cache";
 
 const db = globalThis.db;
 const readfile = globalThis.readSql;
@@ -6,6 +8,11 @@ const readfile = globalThis.readSql;
 function check(err: unknown): void {
     console.error(err);
 }
+
+// anti memory leak lol
+setInterval(() => {
+    cache.clear();
+}, 10800000);
 
 export const createMessage = async (message: Message): Promise<void> => {
     // check if user exists in the db and isn't banned
