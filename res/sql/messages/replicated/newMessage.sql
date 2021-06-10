@@ -1,10 +1,8 @@
-INSERT INTO origin_message (messageid, server_origin, author)
+INSERT INTO replicated_message (messageid, server, originId)
 VALUES (
     ?,
     (SELECT localid
         FROM servers
         WHERE serverid=?),
-    (SELECT localid
-        FROM users
-        WHERE localid=?)
+    ?
 );
