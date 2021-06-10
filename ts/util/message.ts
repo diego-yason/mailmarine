@@ -32,7 +32,7 @@ setInterval(() => {
     usercache.clear();
     channelcache.clear();
     bancache.clear();
-}, parseInt(process.env.CACHE) || 10800000);
+}, globalThis.cacheTime);
 
 export const createOriginMessage = async (message: Message): Promise<void> => {
     // check if user exists in the db and isn't banned

@@ -43,6 +43,7 @@ axiosretry(axios, {
 globalThis.db = database;
 globalThis.axios = axios;
 globalThis.client = client;
+globalThis.cacheTime = parseInt(process.env.CACHE) || 10800000;
 
 globalThis.readSql = (file) => {
     return fs.readFileSync(file).toString();

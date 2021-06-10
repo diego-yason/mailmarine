@@ -5,7 +5,7 @@ const db = globalThis.db;
 
 setInterval(() => {
     channelcache.clear();
-}, parseInt(process.env.CACHE) || 10800000);
+}, globalThis.cacheTime);
 
 export const getChannel = async (serverId: string): Promise<string> => {
     if (channelcache.get(serverId)) {

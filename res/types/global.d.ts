@@ -11,9 +11,11 @@ declare global {
     var axios:   AxiosInstance;
     var readSql: (file: string) => string;
     var client:  Client;
+    var cacheTime: number;
 }
 
 declare var db:      Pool;
 declare var axios :  AxiosInstance;
 declare var readSql: (file: string) => string;
 declare var client:  Client;
+declare var cacheTime: number;
