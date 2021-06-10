@@ -51,4 +51,8 @@ client.once("ready", () => {
     console.log("Ready");
 });
 
+client.on("message", (message) => {
+    
+});
+
 client.login(process.env.TOKEN);
