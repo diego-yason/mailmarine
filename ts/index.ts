@@ -16,12 +16,12 @@ const database = await mysql.createPool({
     database: "mailmarine"
 });
 
-const axios = axiospkg.defaults;
-
-axios.baseURL = "https://discord.com/api/v9";
-axios.headers = {
-    Authorization: `Bot ${process.env.TOKEN}`
-};
+const axios = axiospkg.create({
+    baseURL: "https://discord.com/api/v9",
+    headers: {
+        Authorization: `Bot ${process.env.TOKEN}`
+    }
+});
 
 globalThis.db = database;
 globalThis.axios = axios;

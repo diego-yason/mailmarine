@@ -2,15 +2,15 @@
 /* eslint-disable no-var */
 // ? needed or else linter won't be happy
 
-import { AxiosRequestConfig } from "axios";
+import { AxiosInstance } from "axios";
 import { Pool } from "mysql2/promise";
 
 declare global {
     var db:      Pool;
-    var axios:   AxiosRequestConfig;
+    var axios:   AxiosInstance;
     var readSql: (file: string) => string;
 }
 
 declare var db:      Pool;
-declare var axios :  AxiosRequestConfig;
+declare var axios :  AxiosInstance;
 declare var readSql: (file: string) => string;
