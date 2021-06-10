@@ -19,7 +19,7 @@ const sql = {
         delete: (origin: boolean) => readfile(`@sql/messages/${origin ? "origin" : "replicated"}/deleteMessage.sql`),
     },
     server: {
-        findChannel: readfile("@sql/servers/getChannel.sql"),
+        findChannel: readfile("@sql/servers/getChannelByLocal.sql"),
     }
 };
 
