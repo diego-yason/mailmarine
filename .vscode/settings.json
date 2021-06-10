@@ -1,6 +1,7 @@
 {
     "path-intellisense.mappings": {
         "@root": "${workspaceFolder}",
-        "@sql": "${workspaceFolder}/res/sql"
+        "@sql": "${workspaceFolder}/res/sql",
+        "@typedefs": "${workspaceFolder}/res/types"
     }
 }
