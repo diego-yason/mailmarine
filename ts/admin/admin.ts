@@ -3,6 +3,7 @@ import { ButtonInteraction, Interaction } from "res/types/interaction";
 import { message } from "res/types/discord";
 
 const axios = globalThis.axios;
+const readsql = globalThis.readSql;
 
 export const removeAdminResponse = (interaction: Interaction): void => {
     // REMINDME: this has to be tested
@@ -12,7 +13,7 @@ export const removeAdminResponse = (interaction: Interaction): void => {
             embeds: [
                 {
                     description: "**WARNING**: You are about to remove an admin from the system. Confirm within 2 mins.",
-                    color: 15885155,
+                    color: 14928484,
                     timestamp: new Date().toISOString(),
                     footer: {
                         text: "MailMarine by KingMarine#5676"
@@ -39,7 +40,7 @@ export const removeAdminResponse = (interaction: Interaction): void => {
                             type: 2,
                             style: 4,
                             label: "Yes",
-                            custom_id: "yes"
+                            custom_id: interaction.data.options[0].value
                         }
                     ]
                 }
@@ -50,6 +51,48 @@ export const removeAdminResponse = (interaction: Interaction): void => {
 
 export const removeAdminConfirm = (interaction: ButtonInteraction): void => {
     if (interaction.member.user.id == process.env.ID) {
-        // TODO: make button response
-    } 
-}
+        const message = interaction.message.embed[0];
+
+        interaction.message.components.forEach((val) => {
+            val.disabled = true;
+        });
+
+        if (interaction.data.custom_id != "no") {
+            // confirmed
+
+            message.color = 7725157;
+            message.description = "✅ **Complete**\n~~**WARNING**: You are about to remove an admin from the system. Confirm within 2 mins.~~";
+
+            axios.post(`/interactions/${interaction.id}/${interaction.token}/callback`, {
+                type: 4,
+                data: interaction.message
+            });
+
+            db.query(readsql("/res/sql/admin/delete.sql"), [interaction.data.custom_id]); // TODO make query
+        } else {
+            // cancelled
+
+            message.color = 15556961;
+            message.description = "❌ **Rejected**\n~~**WARNING**: You are about to remove an admin from the system. Confirm within 2 mins.~~";
+
+            axios.post(`/interactions/${interaction.id}/${interaction.token}/callback`, {
+                type: 4,
+                data: interaction.message
+            });
+        }
+    }
+};
+
+export const addAdmin = (interaction: Interaction): void => {
+    axios.post(`/interactions/${interaction.id}/${interaction.token}/callback`, {
+        type: 5
+    });
+
+    const options = interaction.data.options;
+
+    db.query(readsql("/res/sql/admin/create.sql"), [options[0].value, options[0].value, options[1].value, options[2].value, options[3].value, options[4].value, options[5].value]).then(() => {
+        axios.patch(`/webhooks/${process.env.APPID}/${interaction.token}/messages/@original`, {
+            content: `UserID ${options[0].value} has been added as an admin.`
+        });
+    });
+};
