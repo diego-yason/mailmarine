@@ -1,25 +1,29 @@
-import * as channelcache from "memory-cache";
-import * as Db from "res/types/database";
+import * as membercache from "memory-cache";
+import * as Db from "../../res/types/database";
 
 const db = globalThis.db;
 
 setInterval(() => {
-    channelcache.clear();
+    membercache.clear();
 }, globalThis.cacheTime);
 
-export const getChannel = async (serverId: string): Promise<string> => {
-    if (channelcache.get(serverId)) {
-        return new Promise((res) => res(channelcache.get(serverId)));
+export const getUser = async (userId: string): Promise<number> => {
+    if (membercache.get(userId)) {
+        return new Promise((res) => res(membercache.get(userId)));
     }
 
-    const query: Db.Servers[] = await (db.execute(readSql("@sql/servers/getServer.sql"), [serverId]))[0];
+    const query: Db.User[] = await (db.execute(readSql("/res/sql/users/readUsersById.sql"), [userId]))[0];
 
     return new Promise((res, rej) => {
         if (query.length != 1) {
             rej("Not Registered");
         } else {
-            channelcache.put(serverId, query[0].channel);
-            res(query[0].channel);
+            membercache.put(userId, query[0].localid);
+            res(query[0].localid);
         }
     });
+};
+
+export const newUser = (userId: string): void => {
+    db.execute(readSql("/res/sql/users/createUser.sql"), [userId]);
 };
