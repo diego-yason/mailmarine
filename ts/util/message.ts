@@ -9,17 +9,17 @@ const readfile = globalThis.readSql;
 
 const sql = {
     users: {
-        read: readfile("@sql/users/readUsersById.sql"),
-        create: readfile("@sql/users/createUser.sql"),
-        checkBan: readfile("@sql/users/checkForBan.sql"),
+        read: readfile("/res/sql/users/readUsersById.sql"),
+        create: readfile("/res/sql/users/createUser.sql"),
+        checkBan: readfile("/res/sql/users/checkForBan.sql"),
     },
     messages: {
-        new: (origin: boolean) => readfile(`@sql/messages/${origin ? "origin" : "replicated"}/newMessage.sql`),
-        find: (origin: boolean) => readfile(`@sql/messages/${origin ? "origin" : "replicated"}/findMessage.sql`),
-        delete: (origin: boolean) => readfile(`@sql/messages/${origin ? "origin" : "replicated"}/deleteMessage.sql`),
+        new: (origin: boolean) => readfile(`/res/sql/messages/${origin ? "origin" : "replicated"}/newMessage.sql`),
+        find: (origin: boolean) => readfile(`/res/sql/messages/${origin ? "origin" : "replicated"}/findMessage.sql`),
+        delete: (origin: boolean) => readfile(`/res/sql/messages/${origin ? "origin" : "replicated"}/deleteMessage.sql`),
     },
     server: {
-        findChannel: readfile("@sql/servers/getChannelByLocal.sql"),
+        findChannel: readfile("/res/sql/servers/getChannelByLocal.sql"),
     }
 };
 
