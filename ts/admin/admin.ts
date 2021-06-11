@@ -1,4 +1,3 @@
-import * as Db from "res/types/database";
 import { ButtonInteraction, Interaction } from "res/types/interaction";
 import { message } from "res/types/discord";
 
