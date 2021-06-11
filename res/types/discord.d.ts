@@ -1,4 +1,26 @@
-export interface Embed {
+export interface message {
+    content?: string;
+    tts?: boolean;
+    file?: unknown;
+    embed?: Embed[];
+    payload_json?: unknown;
+    allowed_mentions?: unknown; // TODO: implement https://discord.com/developers/docs/resources/channel#allowed-mentions-object
+    message_reference?: unknown; // TODO: implement https://discord.com/developers/docs/resources/channel#message-reference-object-message-reference-structure
+    components?: Component[];
+}
+
+interface Component {
+    type: number;
+    style?: number;
+    label?: string;
+    emoji?: unknown; // TODO: implement https://discord.com/developers/docs/interactions/message-components#component-object
+    custom_id?: string;
+    url?: string;
+    disabled?: boolean;
+    components?: Component[];
+}
+
+interface Embed {
     title?:       string;
     type?:        string;
     description?: string;
