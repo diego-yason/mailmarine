@@ -20,6 +20,12 @@
                         },
                         {
                             "type": 5,
+                            "name": "delete",
+                            "description": "Permitted to delete messages?",
+                            "required": true
+                        },
+                        {
+                            "type": 5,
                             "name": "mute",
                             "description": "Permitted to mute (temp-ban)?",
                             "required": true
