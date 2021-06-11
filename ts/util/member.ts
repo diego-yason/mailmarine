@@ -1,5 +1,5 @@
 import * as membercache from "memory-cache";
-import * as Db from "../../res/types/database";
+import * as Db from "res/types/database";
 
 const db = globalThis.db;
 
