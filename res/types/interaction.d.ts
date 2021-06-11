@@ -37,7 +37,7 @@ export interface Member {
 }
 
 export interface User {
-    id:            number;
+    id:            string;
     username:      string;
     avatar:        string;
     discriminator: string;
