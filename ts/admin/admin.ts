@@ -60,7 +60,7 @@ export const removeAdminConfirm = (interaction: ButtonInteraction): void => {
             // confirmed
 
             message.color = 7725157;
-            message.description = "✅ **Complete**\n~~**WARNING**: You are about to remove an admin from the system. Confirm within 2 mins.~~";
+            message.description = `✅ **Complete. Changes confirmed**\n~~${message.description}~~`;
 
             axios.post(`/interactions/${interaction.id}/${interaction.token}/callback`, {
                 type: 4,
@@ -72,7 +72,7 @@ export const removeAdminConfirm = (interaction: ButtonInteraction): void => {
             // cancelled
 
             message.color = 15556961;
-            message.description = "❌ **Rejected**\n~~**WARNING**: You are about to remove an admin from the system. Confirm within 2 mins.~~";
+            message.description = `❌ **Rejected. Changes undone.**\n~~${message.description}~~`;
 
             axios.post(`/interactions/${interaction.id}/${interaction.token}/callback`, {
                 type: 4,
