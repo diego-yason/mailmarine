@@ -52,6 +52,10 @@ export const removeAdminConfirm = (interaction: ButtonInteraction): void => {
     if (interaction.member.user.id == process.env.ID) {
         const message = interaction.message.embeds[0];
 
+        interaction.message.components.forEach(comp => {
+            comp.disabled = true;
+        });
+
         interaction.message.components.forEach((val) => {
             val.disabled = true;
         });
