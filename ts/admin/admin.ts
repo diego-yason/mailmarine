@@ -56,10 +56,6 @@ export const removeAdminConfirm = (interaction: ButtonInteraction): void => {
             comp.disabled = true;
         });
 
-        interaction.message.components.forEach((val) => {
-            val.disabled = true;
-        });
-
         if (interaction.data.custom_id != "no") {
             // confirmed
 
