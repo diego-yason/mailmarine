@@ -50,7 +50,7 @@ export const removeAdminResponse = (interaction: Interaction): void => {
 
 export const removeAdminConfirm = (interaction: ButtonInteraction): void => {
     if (interaction.member.user.id == process.env.ID) {
-        const message = interaction.message.embed[0];
+        const message = interaction.message.embeds[0];
 
         interaction.message.components.forEach((val) => {
             val.disabled = true;
