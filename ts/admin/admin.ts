@@ -67,7 +67,7 @@ export const removeAdminConfirm = (interaction: ButtonInteraction): void => {
                 data: interaction.message
             });
 
-            db.query(readsql("/res/sql/admin/delete.sql"), [interaction.data.custom_id]); // TODO make query
+            db.query(readsql("/res/sql/admin/delete.sql"), [interaction.data.custom_id]);
         } else {
             // cancelled
 
