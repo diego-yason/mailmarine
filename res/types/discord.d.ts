@@ -2,7 +2,7 @@ export interface message {
     content?: string;
     tts?: boolean;
     file?: unknown;
-    embed?: Embed[];
+    embeds?: Embed[];
     payload_json?: unknown;
     allowed_mentions?: unknown; // TODO: implement https://discord.com/developers/docs/resources/channel#allowed-mentions-object
     message_reference?: unknown; // TODO: implement https://discord.com/developers/docs/resources/channel#message-reference-object-message-reference-structure
