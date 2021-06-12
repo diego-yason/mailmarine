@@ -1,5 +1,5 @@
 import { ButtonInteraction, Interaction } from "res/types/interaction";
-import { message } from "res/types/discord";
+import { Embed, message } from "res/types/discord";
 
 const axios = globalThis.axios;
 const readsql = globalThis.readSql;
@@ -91,7 +91,40 @@ export const addAdmin = (interaction: Interaction): void => {
 
     db.query(readsql("/res/sql/admin/create.sql"), [options[0].value, options[0].value, options[1].value, options[2].value, options[3].value, options[4].value, options[5].value]).then(() => {
         axios.patch(`/webhooks/${process.env.APPID}/${interaction.token}/messages/@original`, {
-            content: `UserID ${options[0].value} has been added as an admin.`
+            content: `UserID ${options[0].value} has been added as an admin.`,
+            embeds: <Embed[]>[
+                {
+                    description: `Admin permissions for <@${options[0].value}>:`,
+                    color: 7725157,
+                    fields: [
+                        {
+                            name: "Can delete?",
+                            value: options[1].value,
+                            inline: false
+                        },
+                        {
+                            name: "Can temp-ban?",
+                            value: options[2].value,
+                            inline: true
+                        },
+                        {
+                            name: "Can untemp-ban?",
+                            value: options[3].value,
+                            inline: true
+                        },
+                        {
+                            name: "Can ban?",
+                            value: options[4].value,
+                            inline: true
+                        },
+                        {
+                            name: "Can unban?",
+                            value: options[5].value,
+                            inline: true
+                        }
+                    ]
+                }
+            ]
         });
     });
 };
