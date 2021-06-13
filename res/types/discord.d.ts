@@ -1,3 +1,5 @@
+import { PartialChannel, User } from "./interaction";
+
 export interface message {
     content?: string;
     tts?: boolean;
@@ -79,4 +81,46 @@ interface Field {
     name:    string;
     value:   string;
     inline?: boolean;
+}
+
+export interface Role {
+    id:          string;
+    name:        string;
+    color:       number;
+    hoist:       boolean;
+    position:    number;
+    permissions: string;
+    managed:     boolean;
+    mentionable: boolean;
+    tags?:       unknown; // TODO: implement role tags https://discord.com/developers/docs/topics/permissions#role-object-role-tags-structure
+}
+
+export interface Channel extends PartialChannel {
+    guild_id:               string;
+    position:               number;
+    permission_overwrites?: Overwrite[];
+    topic?:                 string;
+    nsfw?:                  boolean;
+    last_message_id?:       string;
+    bitrate?:               number;
+    user_limit?:            number;
+    rate_limit_per_user:    number;
+    recipients?:            User[];
+    icon?:                  string;
+    owner_id?:              string;
+    parent_id?:             string;
+    last_pin_timestamp?:    string;
+    rtc_region?:            string;
+    video_quality_mode?:    number;
+    message_count?:         number;
+    member_count?:          number;
+    thread_metadata?:       unknown; // TODO: implement threads
+    member?:                unknown; // TODO: implement threads
+}
+
+interface Overwrite {
+    id:    string;
+    type:  number;
+    allow: string;
+    deny:  string;
 }
