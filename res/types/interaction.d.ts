@@ -2,6 +2,27 @@
 
 import { message } from "./discord";
 
+export interface InteractionJson {
+    name: string;
+    description: string;
+    options?: ApplicationCommandOption[];
+    default_permission?: boolean;
+}
+
+interface ApplicationCommandOption {
+    type: number;
+    name: string;
+    description: string;
+    required?: boolean;
+    choices?: ApplicationCommandOptionChoice[];
+    options?: ApplicationCommandOption[];
+}
+
+interface ApplicationCommandOptionChoice {
+    name: string;
+    value: string | number;
+}
+
 export interface Interaction {
     type:       number;
     token:      string;
