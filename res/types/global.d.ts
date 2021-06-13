@@ -12,6 +12,16 @@ declare global {
     var readSql: (file: string) => string;
     var client:  Client;
     var cacheTime: number;
+    namespace NodeJS {
+        interface ProcessEnv {
+            TOKEN: string;
+            DATABASE_IP: string;
+            DATABASE_PORT: number;
+            DATABASE_USER: string;
+            DATABASE_PASS: string;
+            APPID: string;
+        }
+    }
 }
 
 declare var db:      Pool;
