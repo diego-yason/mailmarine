@@ -5,8 +5,11 @@ import axiospkg from "axios";
 import * as fs from "fs";
 import axiosretry from "axios-retry";
 import * as server from "./util/server";
+import init from "./globalThisInit";
 
 dotenv.config();
+
+init();
 
 const client = new Discord.Client();
 
@@ -40,9 +43,7 @@ axiosretry(axios, {
     })
 });
 
-globalThis.db = database;
-globalThis.axios = axios;
-globalThis.client = client;
+
 globalThis.cacheTime = parseInt(process.env.CACHE) || 10800000;
 
 globalThis.readSql = (file) => {
