@@ -136,3 +136,19 @@ export interface ComponentComponent {
     style:     number;
     custom_id: string;
 }
+
+export interface PartialGuildCommandPermisisons {
+    id:             string;
+    permisisons:    CommandPermisisons[];
+}
+
+export interface GuildCommandPermisisons extends PartialGuildCommandPermisisons {
+    application_id: string;
+    guild_id:       string;
+}
+
+interface CommandPermisisons {
+    id:         string;
+    type:       number;
+    permission: boolean;
+}
