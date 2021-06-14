@@ -17,7 +17,7 @@ const database = await mysql.createPool({
     user: process.env.DATABASE_USER,
     password: process.env.DATABASE_PASS,
     host: process.env.DATABASE_IP,
-    port: parseInt(process.env.DATABASE_PORT),
+    port: process.env.DATABASE_PORT,
     database: "mailmarine"
 });
 
@@ -43,7 +43,9 @@ axiosretry(axios, {
     })
 });
 
-
+/**
+ * Sets the time between each cache clear in ms
+ */
 globalThis.cacheTime = parseInt(process.env.CACHE) || 10800000;
 
 globalThis.readSql = (file) => {
