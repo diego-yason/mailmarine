@@ -149,6 +149,9 @@ export interface GuildCommandPermisisons extends PartialGuildCommandPermisisons 
 
 interface CommandPermisisons {
     id:         string;
+    /**
+     * `0` for userId | `1` for roleId
+     */
     type:       number;
     permission: boolean;
 }
