@@ -11,6 +11,9 @@ declare global {
     var axios:   AxiosInstance;
     var readSql: (file: string) => string;
     var client:  Client;
+    /**
+     * Sets the time between each cache clear in ms
+     */
     var cacheTime: number;
     namespace NodeJS {
         interface ProcessEnv {

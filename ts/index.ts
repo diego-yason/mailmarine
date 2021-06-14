@@ -43,9 +43,6 @@ axiosretry(axios, {
     })
 });
 
-/**
- * Sets the time between each cache clear in ms
- */
 globalThis.cacheTime = parseInt(process.env.CACHE) || 10800000;
 
 globalThis.readSql = (file) => {
