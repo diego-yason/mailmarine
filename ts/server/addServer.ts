@@ -13,9 +13,9 @@ setInterval(() => {
 const addChannel = "853561712276275210";
 
 /**
- * Command ID of the /
+ * Command ID of the /unassign command
  */
-const removeChannel = "";
+const removeChannel = "853990674105761842";
 
 export async function add(interaction: Interaction): Promise<void> {
     axios.post(`/interactions/${interaction.id}/${interaction.token}/callback`, {
