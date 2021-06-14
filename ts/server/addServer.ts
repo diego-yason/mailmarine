@@ -41,17 +41,17 @@ export async function add(interaction: Interaction): Promise<void> {
             if (permBits[(permBits.length - 1) - 4] != "1") {
                 // no perms
                 axios.patch(`/webhooks/${process.env.APPID}/${interaction.token}/messages/@original`, <Omit<message, "tts">>{
-                    content: readSql("/res/errors/no_perms.txt")
+                    content: readFile("/res/errors/no_perms.txt")
                 });
             }
             // check if server exists on the db
-            if (await db.query(readSql("/res/sql/servers/getServer.sql"), [interaction.guild_id])[1].length < 1) {
+            if (await db.query(readFile("/res/sql/servers/getServer.sql"), [interaction.guild_id])[1].length < 1) {
                 // server doesn't exist yet, create server record and assume first channel
-                db.query(readSql("/res/sql/servers/addServer.sql"), [interaction.guild_id]);
-                db.query(readSql("/res/sql/channel/firstChannel.sql"));
+                db.query(readFile("/res/sql/servers/addServer.sql"), [interaction.guild_id]);
+                db.query(readFile("/res/sql/channel/firstChannel.sql"));
             } else {
                 // server already existed, assume second or more channel
-                db.query(readSql("/res/sql/channel/replaceChannel.sql"));
+                db.query(readFile("/res/sql/channel/replaceChannel.sql"));
             }
 
             // changing role permissions

@@ -12,7 +12,7 @@ export const getChannel = async (serverId: string): Promise<string> => {
         return new Promise((res) => res(channelcache.get(serverId)));
     }
 
-    const query: Db.Servers[] = await (db.execute(readSql("@sql/servers/getServer.sql"), [serverId]))[0];
+    const query: Db.Servers[] = await (db.execute(readFile("@sql/servers/getServer.sql"), [serverId]))[0];
 
     return new Promise((res, rej) => {
         if (query.length != 1) {

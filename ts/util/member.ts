@@ -12,7 +12,7 @@ export const getUser = async (userId: string): Promise<number> => {
         return new Promise((res) => res(membercache.get(userId)));
     }
 
-    const query: Db.User[] = await (db.execute(readSql("/res/sql/users/readUsersById.sql"), [userId]))[0];
+    const query: Db.User[] = await (db.execute(readFile("/res/sql/users/readUsersById.sql"), [userId]))[0];
 
     return new Promise((res, rej) => {
         if (query.length != 1) {
@@ -25,5 +25,5 @@ export const getUser = async (userId: string): Promise<number> => {
 };
 
 export const newUser = (userId: string): void => {
-    db.execute(readSql("/res/sql/users/createUser.sql"), [userId]);
+    db.execute(readFile("/res/sql/users/createUser.sql"), [userId]);
 };

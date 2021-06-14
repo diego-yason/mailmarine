@@ -9,7 +9,7 @@ import { Pool } from "mysql2/promise";
 declare global {
     var db:      Pool;
     var axios:   AxiosInstance;
-    var readSql: (file: string) => string;
+    var readFile: (file: string) => string;
     var client:  Client;
     /**
      * Sets the time between each cache clear in ms

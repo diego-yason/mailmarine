@@ -5,7 +5,7 @@ import * as channelcache from "memory-cache";
 import * as bancache from "memory-cache";
 
 const db = globalThis.db;
-const readfile = globalThis.readSql;
+const readfile = globalThis.readFile;
 
 const sql = {
     users: {

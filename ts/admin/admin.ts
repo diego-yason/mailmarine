@@ -2,7 +2,7 @@ import { ButtonInteraction, Interaction } from "res/types/interaction";
 import { Embed, message } from "res/types/discord";
 
 const axios = globalThis.axios;
-const readsql = globalThis.readSql;
+const readsql = globalThis.readFile;
 
 export const removeAdminResponse = (interaction: Interaction): void => {
     // REMINDME: this has to be tested
