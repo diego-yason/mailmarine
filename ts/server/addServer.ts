@@ -1,6 +1,6 @@
 import { Interaction, PartialGuildCommandPermission } from "res/types/interaction";
 import * as everyoneCache from "memory-cache";
-import { message, Role } from "res/types/discord";
+import { Channel, message, Role } from "res/types/discord";
 import { type } from "os";
 
 setInterval(() => {
@@ -33,6 +33,17 @@ export async function add(interaction: Interaction): Promise<void> {
         const [id, PartialChannel] = interaction.data.resolved.channels.entries();
         if (PartialChannel[1].type == 0) {
 
+            // permission check
+            const channel: Channel = (await axios.get(`/channels/${PartialChannel[1].id}`)).data;
+
+            const permBits = parseInt(channel.permission_overwrites.filter(value => value.id == "850002815103139892")[0].allow).toString(2)
+
+            if (permBits[(permBits.length - 1) - 4] != "1") {
+                // no perms
+                axios.patch(`/webhooks/${process.env.APPID}/${interaction.token}/messages/@original`, <Omit<message, "tts">>{
+                    content: readSql("/res/errors/no_perms.txt")
+                });
+            }
             // check if server exists on the db
             if (await db.query(readSql("/res/sql/servers/getServer.sql"), [interaction.guild_id])[1].length < 1) {
                 // server doesn't exist yet, create server record and assume first channel
@@ -81,7 +92,9 @@ export async function add(interaction: Interaction): Promise<void> {
                 content: "Channel is now in the CSM-System. Please keep the required permissions as is, modification may cause disconnection from the system."
             });
         } else {
-            // wrong channel 
+            axios.patch(`/webhooks/${process.env.APPID}/${interaction.token}/messages/@original`, <Omit<message, "tts">>{
+                content: "Apologies, you don't have the right server permission to use this command.\nRequired permission: Manage Server."
+            });
         }
     }
 }
