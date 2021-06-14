@@ -1,6 +1,6 @@
 import { Interaction, PartialGuildCommandPermission } from "res/types/interaction";
 import * as everyoneCache from "memory-cache";
-import { Role } from "res/types/discord";
+import { message, Role } from "res/types/discord";
 import { type } from "os";
 
 setInterval(() => {
@@ -54,7 +54,7 @@ export async function add(interaction: Interaction): Promise<void> {
             }
 
 
-            axios.put(`/applications/${process.env.APPID}/guilds/${interaction.guild_id}/commands/permissions`, <PartialGuildCommandPermission[]>[
+            await axios.put(`/applications/${process.env.APPID}/guilds/${interaction.guild_id}/commands/permissions`, <PartialGuildCommandPermission[]>[
                 {
                     id: addChannel,
                     permissions: [
@@ -76,6 +76,10 @@ export async function add(interaction: Interaction): Promise<void> {
                     ]
                 }
             ]);
+
+            axios.patch(`/webhooks/${process.env.APPID}/${interaction.token}/messages/@original`, <Omit<message, "tts">>{
+                content: "Channel is now in the CSM-System. Please keep the required permissions as is, modification may cause disconnection from the system."
+            });
         } else {
             // wrong channel 
         }
