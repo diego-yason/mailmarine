@@ -137,17 +137,17 @@ export interface ComponentComponent {
     custom_id: string;
 }
 
-export interface PartialGuildCommandPermisisons {
+export interface PartialGuildCommandPermission {
     id:             string;
-    permisisons:    CommandPermisisons[];
+    permissions:    CommandPermission[];
 }
 
-export interface GuildCommandPermisisons extends PartialGuildCommandPermisisons {
+export interface GuildCommandPermission extends PartialGuildCommandPermission {
     application_id: string;
     guild_id:       string;
 }
 
-interface CommandPermisisons {
+interface CommandPermission {
     id:         string;
     /**
      * `0` for userId | `1` for roleId
