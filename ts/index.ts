@@ -5,11 +5,8 @@ import axiospkg from "axios";
 import * as fs from "fs";
 import axiosretry from "axios-retry";
 import * as server from "./util/server";
-import init from "./globalThisInit";
 
 dotenv.config();
-
-init();
 
 const client = new Discord.Client();
 
