@@ -21,12 +21,11 @@
     "axios-retry": "^3.1.9",
     "discord.js": "^12.5.3",
     "dotenv": "^10.0.0",
-    "memory-cache": "^0.2.0",
     "mysql2": "^2.2.5"
   },
   "devDependencies": {
-    "@types/memory-cache": "^0.2.1",
     "@types/jest": "^26.0.23",
+    "@types/memory-cache": "^0.2.1",
     "@types/mysql": "^2.15.18",
     "@typescript-eslint/eslint-plugin": "^4.26.0",
     "@typescript-eslint/parser": "^4.26.0",

@@ -1,5 +1,6 @@
-import * as membercache from "memory-cache";
 import * as Db from "res/types/database";
+
+const membercache = new Map<string, number>();
 
 const db = globalThis.db;
 
@@ -7,7 +8,7 @@ setInterval(() => {
     membercache.clear();
 }, globalThis.cacheTime);
 
-export const getUser = async (userId: string): Promise<number> => {
+export const getLocalUser = async (userId: string): Promise<number> => {
     if (membercache.get(userId)) {
         return new Promise((res) => res(membercache.get(userId)));
     }

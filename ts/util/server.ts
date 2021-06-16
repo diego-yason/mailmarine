@@ -1,15 +1,16 @@
-import * as channelcache from "memory-cache";
 import * as Db from "res/types/database";
 
 const db = globalThis.db;
 
+const cache = new Map<string, string>();
+
 setInterval(() => {
-    channelcache.clear();
+    cache.clear();
 }, globalThis.cacheTime);
 
 export const getChannel = async (serverId: string): Promise<string> => {
-    if (channelcache.get(serverId)) {
-        return new Promise((res) => res(channelcache.get(serverId)));
+    if (cache.get(serverId)) {
+        return new Promise((res) => res(cache.get(serverId)));
     }
 
     const query: Db.Servers[] = await (db.execute(readFile("@sql/servers/getServer.sql"), [serverId]))[0];
@@ -18,7 +19,7 @@ export const getChannel = async (serverId: string): Promise<string> => {
         if (query.length != 1) {
             rej("Not Registered");
         } else {
-            channelcache.put(serverId, query[0].channel);
+            cache.put(serverId, query[0].channel);
             res(query[0].channel);
         }
     });
