@@ -60,9 +60,6 @@ client.on("message", async (message) => {
         if (message.channel.id != await server.getChannel(message.guild.id)) {
             return;
         }
-    } catch {
-        // not yet set up, ignoring the message
-        return;
     }
 });
 
