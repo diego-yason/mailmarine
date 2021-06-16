@@ -19,7 +19,7 @@ export const getChannel = async (serverId: string): Promise<string> => {
         if (query.length != 1) {
             rej("Not Registered");
         } else {
-            cache.put(serverId, query[0].channel);
+            cache.set(serverId, query[0].channel);
             res(query[0].channel);
         }
     });
