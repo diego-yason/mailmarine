@@ -19,7 +19,7 @@ declare global {
         interface ProcessEnv {
             TOKEN: string;
             DATABASE_IP: string;
-            DATABASE_PORT: number;
+            DATABASE_PORT: string;
             DATABASE_USER: string;
             DATABASE_PASS: string;
             APPID: string;
