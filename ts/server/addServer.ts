@@ -1,6 +1,7 @@
 import { Interaction, PartialGuildCommandPermission } from "res/types/interaction";
-import * as everyoneCache from "memory-cache";
 import { Channel, message, Role } from "res/types/discord";
+
+const everyoneCache = new Map<string, string>();
 
 setInterval(() => {
     everyoneCache.clear();
@@ -60,7 +61,7 @@ export async function add(interaction: Interaction): Promise<void> {
                 // get the everyone role from Discord
                 const roles: Role[] = (await axios.get(`/guilds/${interaction.guild_id}/roles`)).data;
 
-                everyoneCache.put(interaction.guild_id, (roles.filter((value) => value.name == "@everyone"))[0]);
+                everyoneCache.set(interaction.guild_id, (roles.filter((value) => value.name == "@everyone"))[0].id);
             }
 
 
