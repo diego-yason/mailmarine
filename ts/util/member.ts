@@ -19,7 +19,7 @@ export const getLocalUser = async (userId: string): Promise<number> => {
         if (query.length != 1) {
             rej("Not Registered");
         } else {
-            membercache.put(userId, query[0].localid);
+            membercache.set(userId, query[0].localid);
             res(query[0].localid);
         }
     });

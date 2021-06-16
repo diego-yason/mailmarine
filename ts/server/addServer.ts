@@ -1,7 +1,6 @@
 import { Interaction, PartialGuildCommandPermission } from "res/types/interaction";
 import * as everyoneCache from "memory-cache";
 import { Channel, message, Role } from "res/types/discord";
-import { type } from "os";
 
 setInterval(() => {
     everyoneCache.clear();
@@ -30,13 +29,13 @@ export async function add(interaction: Interaction): Promise<void> {
         // they have manage server permissions
 
         // validate if its a normal channel
-        const [id, PartialChannel] = interaction.data.resolved.channels.entries();
+        const [PartialChannel] = interaction.data.resolved.channels.entries();
         if (PartialChannel[1].type == 0) {
 
             // permission check
             const channel: Channel = (await axios.get(`/channels/${PartialChannel[1].id}`)).data;
 
-            const permBits = parseInt(channel.permission_overwrites.filter(value => value.id == "850002815103139892")[0].allow).toString(2)
+            const permBits = parseInt(channel.permission_overwrites.filter(value => value.id == "850002815103139892")[0].allow).toString(2);
 
             if (permBits[(permBits.length - 1) - 4] != "1") {
                 // no perms
