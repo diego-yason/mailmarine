@@ -1,5 +1,5 @@
 import { ButtonInteraction, Interaction } from "res/types/interaction";
-import { Embed, message } from "res/types/discord";
+import { Embed, newMessage } from "res/types/discord";
 
 const axios = globalThis.axios;
 const readsql = globalThis.readFile;
@@ -8,7 +8,7 @@ export const removeAdminResponse = (interaction: Interaction): void => {
     // REMINDME: this has to be tested
     axios.post(`/interactions/${interaction.id}/${interaction.token}/callback`, {
         type: 4,
-        data: <message>{
+        data: <newMessage>{
             embeds: [
                 {
                     description: "**WARNING**: You are about to remove an admin from the system. Confirm within 2 mins.",

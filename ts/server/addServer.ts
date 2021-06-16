@@ -1,5 +1,5 @@
 import { Interaction, PartialGuildCommandPermission } from "res/types/interaction";
-import { Channel, message, Role } from "res/types/discord";
+import { Channel, newMessage, Role } from "res/types/discord";
 
 const everyoneCache = new Map<string, string>();
 
@@ -40,7 +40,7 @@ export async function add(interaction: Interaction): Promise<void> {
 
             if (permBits[(permBits.length - 1) - 4] != "1") {
                 // no perms
-                axios.patch(`/webhooks/${process.env.APPID}/${interaction.token}/messages/@original`, <Omit<message, "tts">>{
+                axios.patch(`/webhooks/${process.env.APPID}/${interaction.token}/messages/@original`, <Omit<newMessage, "tts">>{
                     content: readFile("/res/errors/no_perms.txt")
                 });
             }
@@ -88,11 +88,11 @@ export async function add(interaction: Interaction): Promise<void> {
                 }
             ]);
 
-            axios.patch(`/webhooks/${process.env.APPID}/${interaction.token}/messages/@original`, <Omit<message, "tts">>{
+            axios.patch(`/webhooks/${process.env.APPID}/${interaction.token}/messages/@original`, <Omit<newMessage, "tts">>{
                 content: "Channel is now in the CSM-System. Please keep the required permissions as is, modification may cause disconnection from the system."
             });
         } else {
-            axios.patch(`/webhooks/${process.env.APPID}/${interaction.token}/messages/@original`, <Omit<message, "tts">>{
+            axios.patch(`/webhooks/${process.env.APPID}/${interaction.token}/messages/@original`, <Omit<newMessage, "tts">>{
                 content: "Apologies, you don't have the right server permission to use this command.\nRequired permission: Manage Server."
             });
         }

@@ -1,6 +1,6 @@
-import { PartialChannel, User } from "./interaction";
+import { Member, PartialChannel, User } from "./interaction";
 
-export interface message {
+export interface newMessage {
     content?: string;
     tts?: boolean;
     file?: unknown;
@@ -9,6 +9,37 @@ export interface message {
     allowed_mentions?: unknown; // TODO: implement https://discord.com/developers/docs/resources/channel#allowed-mentions-object
     message_reference?: unknown; // TODO: implement https://discord.com/developers/docs/resources/channel#message-reference-object-message-reference-structure
     components?: Component[];
+}
+
+export interface message {
+    id: string;
+    channel_id: string;
+    guild_id?: string;
+    author: User;
+    member?: Member; // REMINDME: partial
+    timestamp: string;
+    edited_timestamp: string;
+    tts: boolean;
+    mention_everyone: boolean;
+    mentions: User[];
+    mention_roles: string[];
+    mention_channels?: unknown; // TODO: implement channel mention objs
+    attachments: unknown; // TODO: implement
+    embeds: Embed[];
+    reactions?: unknown; // TODO: implement
+    nonce?: number | string;
+    pinned: boolean;
+    webhook_id?: string;
+    type: number;
+    activity?: unknown; // TODO: implement
+    application?: unknown; // TODO: implement
+    application_id: string;
+    message_reference?: unknown; // TODO: implement
+    flags?: number;
+    stickers?: unknown; // TODO: implement
+    referenced_message?: message;
+    thread?: Channel;
+    components: Component[];
 }
 
 interface Component {
