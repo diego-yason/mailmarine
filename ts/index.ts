@@ -5,6 +5,7 @@ import axiospkg from "axios";
 import * as fs from "fs";
 import axiosretry from "axios-retry";
 import * as server from "./util/server.js";
+import * as tsMessage from "./util/message.js"
 
 dotenv.config();
 
@@ -56,8 +57,9 @@ client.once("ready", () => {
 client.on("message", async (message) => {
     // check if message is inside the allotted chat
     try {
-        // message outside of the inter server chat
+        // message inside the inter server chat
         if (message.channel.id != await server.getChannel(message.guild.id)) {
+            tsMessage.createOriginMessage(message).then(() => console.log("New message sent. Id: " + message.id));
             return;
         }
     }
