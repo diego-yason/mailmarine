@@ -40,6 +40,9 @@ axiosretry(axios, {
     })
 });
 
+globalThis.axios = axios;
+globalThis.db = database;
+
 globalThis.cacheTime = parseInt(process.env.CACHE) || 10800000;
 
 globalThis.readFile = (file) => {
