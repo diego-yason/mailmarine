@@ -1,5 +1,12 @@
+import { AxiosResponse } from "axios";
 import { Message } from "discord.js";
+import { RowDataPacket } from "mysql2";
 import * as Db from "res/types/database";
+import { message } from "res/types/discord";
+
+interface axiosMessage extends AxiosResponse {
+    data: message;
+}
 
 const usercache = new Map<string, Db.User>();
 const channelcache = new Map<number, string>();
@@ -55,7 +62,23 @@ export const createOriginMessage = async (message: Message): Promise<void> => {
         }
     }
 
-    db.execute(sql.messages.new(true), [message.id, message.guild.id, message.author.id]).catch(check);
+    // send message as embed
+    const originEmbed: axiosMessage = (await axios.post(`/channels/${message.channel.id}/messages`));
+
+    // TODO: ensure that MySql outputs the new row
+    const originalRecord = <Db.OriginMessage> (await db.execute(sql.messages.new(true), [originEmbed.data.id, originEmbed.data.guild_id, message.author.id, message.channel.id]).catch(check))[0][0];
+
+    // duplicate message to all servers
+
+    const channelArray = <Db.Channel[]>(await db.execute(readFile("/res/sql/channel/getAllChannelsExcept.sql"), [message.channel.id]))[0];
+
+    channelArray.forEach(value => {
+        axios.post(`/channels/${value.snowflake}/messages`).then(res => {
+            const data: axiosMessage = res;
+
+            db.query(readFile("/res/sql/messages/replicated/newMessage.sql"), [data.data.guild_id, data.data.id, originalRecord.id]);
+        });
+    });
 };
 
 export const createReplicatedMessage = async (message: Message, localId: number): Promise<void> => {
