@@ -69,7 +69,7 @@ export const deleteMessage = async (messageId: string): Promise<void> => {
     const getChannel = async (): Promise<string> => {
         const server: Db.Servers = await (db.query(sql.server.findChannel, [origin.server_origin]))[0][0];
 
-        return new Promise((res, rej) => {
+        return new Promise((res) => {
             channelcache.set(origin.server_origin, server.channel);
             res(server.channel);
         });
@@ -79,7 +79,7 @@ export const deleteMessage = async (messageId: string): Promise<void> => {
 
     axios.delete(`/channels/${channelcache.get(origin.server_origin) || await getChannel()}/messages/${origin.messageid}`);
 
-    replicated.forEach(async (value, index, array) => {
+    replicated.forEach(async (value) => {
         axios.delete(`/channels/${channelcache.get(value.server) || await getChannel()}/messages/${value.messageid}`);
     });
 };
