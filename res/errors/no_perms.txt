@@ -1,0 +1,1 @@
+**ERROR**: You do not have the required permission (Manage Server) and cannot run this command.
