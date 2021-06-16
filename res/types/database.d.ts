@@ -48,3 +48,9 @@ export interface ReplicatedMessage {
     messageid:       string;
 }
 
+export interface Channel {
+    id:        number;
+    server:    number;
+    current:   number;
+    snowflake: string;
+}
