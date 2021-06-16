@@ -4,7 +4,7 @@ import * as mysql from "mysql2/promise";
 import axiospkg from "axios";
 import * as fs from "fs";
 import axiosretry from "axios-retry";
-import * as server from "./util/server";
+import * as server from "./util/server.js";
 
 dotenv.config();
 
