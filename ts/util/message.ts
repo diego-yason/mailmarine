@@ -1,6 +1,5 @@
 import { AxiosResponse } from "axios";
 import { Message } from "discord.js";
-import { RowDataPacket } from "mysql2";
 import * as Db from "res/types/database";
 import { message } from "res/types/discord";
 
